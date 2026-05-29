@@ -1,0 +1,16 @@
+<div class="card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition-all h-full">
+  <figure class="cursor-pointer" [routerLink]="['/details', item().name.common]" [queryParams]="{ total: totalItems() }">
+    <img [src]="item().flags.png" [alt]="item().flags.alt" class="h-48 w-full object-cover" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title text-primary cursor-pointer hover:underline" 
+        [routerLink]="['/details', item().name.common]" 
+        [queryParams]="{ total: totalItems() }">
+      {{ item().name.common }}
+    </h2>
+    <p class="text-sm text-gray-500">{{ item().name.official }}</p>
+    <div class="mt-2">
+      <p><b>Capital:</b> {{ item().capital ? item().capital[0] : 'No tiene' }}</p>
+    </div>
+  </div>
+</div>
