@@ -3,34 +3,13 @@
   [isLoading]="isLoading()">
 </app-hero>
 
-<div class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
 
-  @if (isLoading()) {
+  @for (country of items(); track country.name.common) {
 
-    <div class="text-center">
-      <span class="loading loading-spinner loading-lg"></span>
-    </div>
-
-  } @else if (error()) {
-
-    <div class="alert alert-error">
-      {{ error() }}
-    </div>
-
-  } @else {
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      @for (country of items(); track country.name.common) {
-
-        <app-card
-          [item]="country"
-          [totalItems]="items().length">
-        </app-card>
-
-      }
-
-    </div>
+    <app-card
+      [item]="country">
+    </app-card>
 
   }
 

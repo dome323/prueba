@@ -1,17 +1,17 @@
-<div class="hero bg-base-200 p-10 rounded-xl">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-3xl font-bold text-primary">
-        Countries App
-      </h1>
+<div class="p-10 bg-gray-200 text-center">
 
-      <p class="py-4">
-        Total países: {{ total() }}
-      </p>
+  <h1 class="text-4xl font-bold">
+    Countries App
+  </h1>
 
-      @if (isLoading()) {
-        <span class="loading loading-spinner loading-lg"></span>
-      }
-    </div>
-  </div>
+  <p class="mt-4">
+    Total países: {{ total() }}
+  </p>
+
+  @if (isLoading()) {
+
+    <p>Cargando...</p>
+
+  }
+
 </div>

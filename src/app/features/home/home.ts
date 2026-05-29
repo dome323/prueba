@@ -1,51 +1,52 @@
-import { Component, signal } from '@angular/core';
+import {Component,inject,OnInit, signal
+} from '@angular/core';
 import { HeroComponent } from '../../Components/hero/hero';
 import { CardComponent } from '../../shared/components/card/card';
 import { Country } from '../countries/models/models.interface';
+import { CountryService } from '../countries/services/country.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, CardComponent],
+  imports: [
+    HeroComponent,
+    CardComponent
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  items = signal<Country[]>([
-    {
-      id: 1,
-      name: {
-        common: 'Ecuador',
-        official: 'Republic of Ecuador'
-      },
-      flags: {
-        png: 'https://flagcdn.com/w320/ec.png',
-        alt: 'Bandera Ecuador'
-      },
-      capital: ['Quito'],
-      population: 18000000,
-      region: 'South America'
-    },
+  private countryService = inject(CountryService);
 
-    {
-      id: 2,
-      name: {
-        common: 'Perú',
-        official: 'Republic of Peru'
-      },
-      flags: {
-        png: 'https://flagcdn.com/w320/pe.png',
-        alt: 'Bandera Perú'
-      },
-      capital: ['Lima'],
-      population: 33000000,
-      region: 'South America'
-    }
-  ]);
+  items = signal<Country[]>([]);
 
-  isLoading = signal(false);
+  isLoading = signal(true);
 
-  error = signal('');
+  ngOnInit(): void {
+
+    this.countryService
+      .getCountries()
+      .subscribe({
+
+        next: (data) => {
+
+          this.items.set(data);
+
+          this.isLoading.set(false);
+
+        },
+
+        error: (err) => {
+
+          console.log(err);
+
+          this.isLoading.set(false);
+
+        }
+
+      });
+
+  }
 
 }

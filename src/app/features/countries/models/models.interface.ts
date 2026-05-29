@@ -1,7 +1,5 @@
 export interface Country {
 
-  id: number;
-
   name: {
     common: string;
     official: string;
@@ -14,7 +12,10 @@ export interface Country {
 
   capital: string[];
 
-  population: number;
+  maps?: {
+    googleMaps: string;
+  };
 
-  region: string;
+  population?: number;
+
 }
